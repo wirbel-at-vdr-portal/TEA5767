@@ -1,0 +1,40 @@
+#######################################
+# Syntax Coloring Map for TEA5767
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+TEA5767	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+SetPllClock              KEYWORD2
+PllClock                 KEYWORD2
+Mute                     KEYWORD2
+SearchDirection          KEYWORD2
+SearchStopLevel          KEYWORD2
+HighSideInjection        KEYWORD2
+Mono                     KEYWORD2
+MuteRight                KEYWORD2
+MuteLeft                 KEYWORD2
+Port1                    KEYWORD2
+Port2                    KEYWORD2
+Standby                  KEYWORD2
+SoftMute                 KEYWORD2
+BandLimits               KEYWORD2
+HighCutControl           KEYWORD2
+StereoNoiseCancelling    KEYWORD2
+SearchIndicator          KEYWORD2
+Deemphasis               KEYWORD2
+Frequency                KEYWORD2
+GetReadyFlag             KEYWORD2
+GetBandlimitFlag         KEYWORD2
+GetFrequency             KEYWORD2
+GetStereoFlag            KEYWORD2
+GetIfCounter             KEYWORD2
+GetIfFrequency           KEYWORD2
+GetAdcLevel              KEYWORD2
+Get_dBuV                 KEYWORD2
+
