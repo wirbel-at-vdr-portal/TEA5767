@@ -21,7 +21,7 @@
  ******************************************************************************/
 #include <Arduino.h>
 #include <Wire.h>
-#include <TEA5767.h>
+#include "TEA5767.h"
 
 TEA5767::TEA5767() :
   PLLREF(0), XTAL(1), // 32.768kHz crystal
@@ -60,7 +60,7 @@ void TEA5767::SetPllClock(int choice) {
      }
 }
 
-int TEA5767::PllClock(void) {
+uint32_t TEA5767::PllClock(void) {
   switch((PLLREF << 1) | XTAL) {
      case 0:  return 13000000;
      case 1:  return 32768;
@@ -158,6 +158,10 @@ void TEA5767::Frequency(float MHz) {
   Set();
 }
 
+uint16_t TEA5767::PllDivider(void) {
+  return PLL;
+}
+
 bool TEA5767::GetReadyFlag(void) {
   Get();
   return (r1 & 0x80) > 0;
@@ -213,19 +217,19 @@ int TEA5767::Get_dBuV(void) {
 }
 
 void TEA5767::Set(bool force) {
-  uint8_t B1,B2,B3,B4,B5;
+  uint8_t u1,u2,u3,u4,u5;
 
   /*
    * 7 MUTE          1=muted,0=not muted
    * 6 SM            1=search mode, 0=no search mode
    * 5..0 PLL[13:8]  setting of synthesizer programmable counter for search or preset
    */
-  B1 = (MUTE << 7) | (SM << 6) | (PLL >> 8);
+  u1 = (MUTE << 7) | (SM << 6) | (PLL >> 8);
 
   /*
    * 7..0 PLL[7:0]
    */
-  B2 = (PLL & 0xFF);
+  u2 = (PLL & 0xFF);
 
   /*
    * 7    SUD        Search Up/Down: SUD = 1 up; SUD = 0 down
@@ -236,7 +240,7 @@ void TEA5767::Set(bool force) {
    * 1    ML         Mute Left:  ML=1 left  audio channel muted and forced mono; if ML = 0 then the left audio channel is not muted
    * 0    SWP1       1:Port1 high, 0:port1 low
    */
-  B3 = (SUD << 7) | (SSL << 5) | (HLSI << 4) | (MS << 3) | (MR << 2) | (ML << 1) | SWP1;
+  u3 = (SUD << 7) | (SSL << 5) | (HLSI << 4) | (MS << 3) | (MR << 2) | (ML << 1) | SWP1;
 
   /*
    * 7    SWP2       wie SWP1 für port2
@@ -248,29 +252,29 @@ void TEA5767::Set(bool force) {
    * 1    SNC        Stereo Noise Cancelling: 1 ON; 0 OFF The stereo noise cancelling (SNC) function gradually turns the stereo decoder from ‘full stereo’ to mono under weak signal conditions.
    * 0    SI         Search Indicator: 1=pin SWPORT1 is output for the ready flag; if SI = 0 then pin SWPORT1 is software programmable port 1
    */
-  B4 = (SWP2 << 7) | (STBY << 6) | (BL << 5) | (XTAL << 4) | (SMUTE << 3) | (HCC << 2) | (SNC << 1) | SI;
+  u4 = (SWP2 << 7) | (STBY << 6) | (BL << 5) | (XTAL << 4) | (SMUTE << 3) | (HCC << 2) | (SNC << 1) | SI;
 
   /*
    * 7    PLLREF     1: 6.5Mhz 6.5 MHz reference frequency for the PLL is enabled; if PLLREF = 0 then the 6.5 MHz reference frequency for the PLL is disabled
    * 6    DTC        de-emphasis time constant; 1:75µs 0:50µs
    * 5:0  not used
    */
-  B5 = (PLLREF << 7) | (DTC << 6);
+  u5 = (PLLREF << 7) | (DTC << 6);
 
-  if (force || (B1 != b1) || (B2 != b2) || (B3 != b3) || (B4 != b4) || (B5 != b5)) {
+  if (force || (u1 != b1) || (u2 != b2) || (u3 != b3) || (u4 != b4) || (u5 != b5)) {
      Wire.beginTransmission(Address); 
-     Wire.write(B1);
-     Wire.write(B2);
-     Wire.write(B3);
-     Wire.write(B4);
-     Wire.write(B5);
+     Wire.write(u1);
+     Wire.write(u2);
+     Wire.write(u3);
+     Wire.write(u4);
+     Wire.write(u5);
      Wire.endTransmission();
 
-     b1 = B1;
-     b2 = B2;
-     b3 = B3;
-     b4 = B4;
-     b5 = B5;
+     b1 = u1;
+     b2 = u2;
+     b3 = u3;
+     b4 = u4;
+     b5 = u5;
      }
 }
 
@@ -279,7 +283,7 @@ void TEA5767::Get(void) {
      return;
 
   lastRead = millis();
-  Wire.beginTransmission(GyroAddress); 
+  Wire.beginTransmission(Address); 
   Wire.requestFrom(Address, 5);
   if (Wire.available() >= 5) {
      r4 = 0;

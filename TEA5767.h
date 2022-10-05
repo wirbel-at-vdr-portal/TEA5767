@@ -20,7 +20,7 @@
  * https://github.com/wirbel-at-vdr-portal/TEA5767
  ******************************************************************************/
 #pragma once
-#include <cstdint> // uint8_t, uint16_tS
+#include <stdint.h> // uint8_t, uint16_tS
 
 class TEA5767 {
 private:
@@ -39,7 +39,7 @@ private:
   int HCC;
   int SNC;
   int SI;
-  int DTC,
+  int DTC;
   uint16_t PLL;
   unsigned long lastRead;
   uint8_t b1,b2,b3,b4,b5;
@@ -50,7 +50,7 @@ private:
 public:
   TEA5767();
   void SetPllClock(int choice);                    // 0:13MHz ext clk, 1:32.768kHz ext clk, 2:6.5MHz
-  int  PllClock(void);                             // Current PLL clock in Hz
+  uint32_t PllClock(void);                         // Current PLL clock in Hz
   void Mute(bool on);                              //
   void SearchDirection(bool up);                   //
   void SearchStopLevel(int level);                 // 1:low, 2:mid, 3:high
@@ -68,7 +68,8 @@ public:
   void SearchIndicator(bool on);                   // port1 as search indicator output.
   void Deemphasis(bool US);                        // US = false: Europe, 50µs, US = true: 75µs
   void Frequency(float MHz);                       // set tuner freq in MHz (preset, instead of search)
-  /* readback functions. */
+  uint16_t PllDivider(void);                       // current PLL value set by Frequency(), readonly.
+  /* hw readback functions. */
   bool GetReadyFlag(void);                         // true: a station has been found or band limit reached, false no station has been found
   bool GetBandlimitFlag(void);                     // true if band limit has been reached
   float GetFrequency(void);                        // frequency after search or preset
