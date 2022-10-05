@@ -1,15 +1,14 @@
-#######################################
+#-------------------------------------------------------------------------------
 # Syntax Coloring Map for TEA5767
-#######################################
-
-#######################################
+#-------------------------------------------------------------------------------
+#
+#-------------------------------------------------------------------------------
 # Datatypes (KEYWORD1)
-#######################################
+#-------------------------------------------------------------------------------
 TEA5767	KEYWORD1
-
-#######################################
+#-------------------------------------------------------------------------------
 # Methods and Functions (KEYWORD2)
-#######################################
+#-------------------------------------------------------------------------------
 SetPllClock              KEYWORD2
 PllClock                 KEYWORD2
 Mute                     KEYWORD2
@@ -29,6 +28,7 @@ StereoNoiseCancelling    KEYWORD2
 SearchIndicator          KEYWORD2
 Deemphasis               KEYWORD2
 Frequency                KEYWORD2
+PllDivider               KEYWORD2
 GetReadyFlag             KEYWORD2
 GetBandlimitFlag         KEYWORD2
 GetFrequency             KEYWORD2
@@ -37,4 +37,3 @@ GetIfCounter             KEYWORD2
 GetIfFrequency           KEYWORD2
 GetAdcLevel              KEYWORD2
 Get_dBuV                 KEYWORD2
-
