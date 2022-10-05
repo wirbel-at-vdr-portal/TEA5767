@@ -20,7 +20,7 @@
  * https://github.com/wirbel-at-vdr-portal/TEA5767
  ******************************************************************************/
 #pragma once
-#include <stdint.h> // uint8_t, uint16_tS
+#include <stdint.h> // uint{8,16,32}_t
 
 class TEA5767 {
 private:
