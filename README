@@ -12,6 +12,7 @@ Use the following class members:
      This sets the FM band limits to 76MHz..91MHz or 88MHz..108MHz.
   - Deemphasis()
      This sets the de-emphasis to 50µs or 75µs.
+The default setup is choosen to Europe: 88..108MHz and 50µs.
 
 --- Hardware Setup ---
 The TEA5767 IC needs a clock for it's PLL. Depending on your circuit or board,
