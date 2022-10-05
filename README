@@ -1,0 +1,5 @@
+This is a arduino library for the single chip FM receiver TEA5767HN.
+
+
+The chip is connected via I2C at address 0x60.
+
