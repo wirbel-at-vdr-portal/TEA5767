@@ -85,6 +85,11 @@ void TEA5767::SearchStopLevel(int level) {
   Set();
 }
 
+void TEA5767::Search(void) {
+  SM = 1;
+  Set();
+}
+
 void TEA5767::HighSideInjection(bool on) {
   HLSI = on ? 1 : 0;
   Set();

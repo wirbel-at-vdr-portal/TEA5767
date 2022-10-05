@@ -54,6 +54,7 @@ public:
   void Mute(bool on);                              //
   void SearchDirection(bool up);                   //
   void SearchStopLevel(int level);                 // 1:low, 2:mid, 3:high
+  void Search(void);                               // search next station.
   void HighSideInjection(bool on);                 // true: high side injection, false: low side injection
   void Mono(bool on);                              //
   void MuteRight(bool on);                         //
