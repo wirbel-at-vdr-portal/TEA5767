@@ -5,6 +5,14 @@ The chip is connected via I2C at address 0x60.
 Follow the instructions for the Wire library to find the pins for your board,
 ie. pins A4 and A5 for Uno and Nano.
 
+--- Hardware Setup ---
+The TEA5767 IC needs a clock for it's PLL. Depending on your circuit or board,
+this might be 32.768kHz, 13MHz, 6.5MHz. Use the class member SetPllClock() to
+setup your PLL clock early in init().
+The default is set to use a 32.768kHz crystal.
+
+Port1 can be setup as a tuning indicator using the SearchIndicator() class member.
+
 --- Region Setup ---
 FM radio needs to be setup to fit your region/Country.
 Use the following class members:
@@ -13,14 +21,6 @@ Use the following class members:
   - Deemphasis()
      This sets the de-emphasis to 50µs or 75µs.
 The default setup is choosen to Europe: 88..108MHz and 50µs.
-
---- Hardware Setup ---
-The TEA5767 IC needs a clock for it's PLL. Depending on your circuit or board,
-this might be 32.768kHz, 13MHz, 6.5MHz. Use the class member SetPllClock() to
-setup your PLL clock early in init().
-The default is set to use a 32.768kHz crystal.
-
-Port1 can be setup as a tuning indicator using the SearchIndicator() class member.
 
 --- Other Settings ---
 Please have a look at the high side and low side injection settings, which also

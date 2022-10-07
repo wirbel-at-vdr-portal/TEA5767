@@ -274,7 +274,6 @@ void TEA5767::Set(bool force) {
      Wire.write(u4);
      Wire.write(u5);
      Wire.endTransmission();
-
      b1 = u1;
      b2 = u2;
      b3 = u3;
